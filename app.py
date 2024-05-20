@@ -1,13 +1,14 @@
-from dotenv import load_dotenv
 import os
 from openai import OpenAI
 import streamlit as st
-import time
+from dotenv import load_dotenv
 import asyncio
 
+# .env 파일에서 환경 변수를 로드합니다.
 load_dotenv()
-API_KEY = os.environ['OPENAI_API_KEY']
+API_KEY = os.getenv('OPENAI_API_KEY')
 
+# OpenAI 클라이언트를 초기화합니다.
 client = OpenAI(api_key=API_KEY)
 
 # thread id를 하나로 관리하기 위함
@@ -63,4 +64,3 @@ if prompt:
     )
     with st.chat_message(messages.data[0].role):
         st.write(messages.data[0].content[0].text.value)
-
